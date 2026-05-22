@@ -391,19 +391,17 @@ function initHorizontalScroll() {
   const cursor = document.getElementById('hscroll-cursor');
   if (!wrapper) return;
 
-  let target = 0;
-  let current = 0;
+  let velocity = 0;
   let raf = null;
+  const friction = 0.88;
 
   function tick() {
-    const diff = target - current;
-    current += diff * 0.1;
-    wrapper.scrollLeft = current;
-    if (Math.abs(diff) > 0.5) {
+    velocity *= friction;
+    wrapper.scrollLeft += velocity;
+    if (Math.abs(velocity) > 0.5) {
       raf = requestAnimationFrame(tick);
     } else {
-      wrapper.scrollLeft = target;
-      current = target;
+      velocity = 0;
       raf = null;
     }
   }
@@ -411,8 +409,7 @@ function initHorizontalScroll() {
   window.addEventListener('wheel', (e) => {
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
     e.preventDefault();
-    const max = wrapper.scrollWidth - wrapper.clientWidth;
-    target = Math.max(0, Math.min(max, target + e.deltaY * 5));
+    velocity += e.deltaY * 0.8;
     if (!raf) raf = requestAnimationFrame(tick);
   }, { passive: false });
 
