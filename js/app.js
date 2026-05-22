@@ -392,14 +392,24 @@ function initHorizontalScroll() {
   if (!wrapper) return;
 
   let targetScroll = 0;
+  let lastDeltaSign = 0;
 
   window.addEventListener('wheel', (e) => {
     e.preventDefault();
     const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+    const deltaSign = Math.sign(e.deltaY);
+
+    // On direction reversal, re-anchor target to current animated position
+    // so the tween doesn't keep coasting in the old direction
+    if (deltaSign !== lastDeltaSign && lastDeltaSign !== 0) {
+      targetScroll = gsap.getProperty(wrapper, 'scrollLeft') || wrapper.scrollLeft;
+    }
+    lastDeltaSign = deltaSign;
+
     targetScroll = Math.max(0, Math.min(maxScroll, targetScroll + e.deltaY));
     gsap.to(wrapper, {
       scrollLeft: targetScroll,
-      duration: 0.8,
+      duration: 0.7,
       ease: 'power3.out',
       overwrite: true
     });
