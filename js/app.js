@@ -5,6 +5,44 @@
 
 import { gsap } from 'gsap';
 
+// ── SCRAMBLE TEXT ────────────────────────────────────────────
+const scrambleState = new WeakMap();
+
+function scrambleText(el, duration = 750) {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+  // Store true original on first call; never overwrite with scrambled text
+  if (!el.dataset.scrambleOriginal) {
+    el.dataset.scrambleOriginal = el.textContent;
+  }
+  const original = el.dataset.scrambleOriginal;
+
+  // Cancel any in-flight animation
+  const prev = scrambleState.get(el);
+  if (prev) clearInterval(prev);
+
+  const frameMs = 30;
+  let elapsed = 0;
+
+  const id = setInterval(() => {
+    elapsed += frameMs;
+    const progress = Math.min(elapsed / duration, 1);
+    el.textContent = original.split('').map((char, i) => {
+      if (char === ' ') return ' ';
+      return progress > i / original.length
+        ? char
+        : chars[Math.floor(Math.random() * chars.length)];
+    }).join('');
+    if (elapsed >= duration) {
+      el.textContent = original;
+      clearInterval(id);
+      scrambleState.delete(el);
+    }
+  }, frameMs);
+
+  scrambleState.set(el, id);
+}
+
 // ── STATE MANAGEMENT ────────────────────────────────────────
 let activeModule = 'butterfly'; // 'butterfly', 'chua', 'double'
 
@@ -129,6 +167,7 @@ function initSelectorList() {
       item.classList.add('active');
       
       activeModule = moduleType;
+      scrambleText(item.querySelector('.selector-title'));
       const config = moduleConfig[activeModule];
       
       // Smooth display text transition
@@ -352,4 +391,7 @@ window.addEventListener('DOMContentLoaded', () => {
   initHardwareControls();
   initDrawers();
   initScopeCanvas();
+  const logo = document.querySelector('.nav-logo');
+  scrambleText(logo);
+  logo.addEventListener('mouseenter', () => scrambleText(logo));
 });
