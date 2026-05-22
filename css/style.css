@@ -56,9 +56,12 @@ html, body {
 }
 
 .page-wrapper {
+  position: fixed;
+  top: 0; left: 0;
   display: flex;
+  width: 100vw;
   height: 100vh;
-  overflow-x: auto;
+  overflow-x: scroll;
   overflow-y: hidden;
   scrollbar-width: none;
 }

@@ -391,30 +391,12 @@ function initHorizontalScroll() {
   const cursor = document.getElementById('hscroll-cursor');
   if (!wrapper) return;
 
-  let targetScroll = 0;
-  let lastDeltaSign = 0;
-
   window.addEventListener('wheel', (e) => {
-    // If trackpad is swiping horizontally, let the browser handle it natively
+    // Trackpad horizontal swipe — let the browser handle natively
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
 
     e.preventDefault();
-    const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
-    const deltaSign = Math.sign(e.deltaY);
-
-    // On direction reversal, re-anchor target to current animated position
-    if (deltaSign !== lastDeltaSign && lastDeltaSign !== 0) {
-      targetScroll = gsap.getProperty(wrapper, 'scrollLeft') || wrapper.scrollLeft;
-    }
-    lastDeltaSign = deltaSign;
-
-    targetScroll = Math.max(0, Math.min(maxScroll, targetScroll + e.deltaY));
-    gsap.to(wrapper, {
-      scrollLeft: targetScroll,
-      duration: 0.7,
-      ease: 'power3.out',
-      overwrite: true
-    });
+    wrapper.scrollBy({ left: e.deltaY * 1.2, behavior: 'smooth' });
   }, { passive: false });
 
   // Custom cursor on philosophy panels
