@@ -391,12 +391,29 @@ function initHorizontalScroll() {
   const cursor = document.getElementById('hscroll-cursor');
   if (!wrapper) return;
 
-  window.addEventListener('wheel', (e) => {
-    // Trackpad horizontal swipe — let the browser handle natively
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+  let target = 0;
+  let current = 0;
+  let raf = null;
 
+  function tick() {
+    const diff = target - current;
+    current += diff * 0.1;
+    wrapper.scrollLeft = current;
+    if (Math.abs(diff) > 0.5) {
+      raf = requestAnimationFrame(tick);
+    } else {
+      wrapper.scrollLeft = target;
+      current = target;
+      raf = null;
+    }
+  }
+
+  window.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
     e.preventDefault();
-    wrapper.scrollBy({ left: e.deltaY * 4, behavior: 'smooth' });
+    const max = wrapper.scrollWidth - wrapper.clientWidth;
+    target = Math.max(0, Math.min(max, target + e.deltaY * 5));
+    if (!raf) raf = requestAnimationFrame(tick);
   }, { passive: false });
 
   // Custom cursor on philosophy panels
