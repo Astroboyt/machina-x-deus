@@ -391,10 +391,18 @@ function initHorizontalScroll() {
   const cursor = document.getElementById('hscroll-cursor');
   if (!wrapper) return;
 
-  // Vertical wheel → horizontal scroll
+  let targetScroll = 0;
+
   window.addEventListener('wheel', (e) => {
     e.preventDefault();
-    wrapper.scrollLeft += e.deltaY;
+    const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+    targetScroll = Math.max(0, Math.min(maxScroll, targetScroll + e.deltaY));
+    gsap.to(wrapper, {
+      scrollLeft: targetScroll,
+      duration: 0.8,
+      ease: 'power3.out',
+      overwrite: true
+    });
   }, { passive: false });
 
   // Custom cursor on philosophy panels
