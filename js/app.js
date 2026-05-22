@@ -386,11 +386,34 @@ function initScopeCanvas() {
 }
 
 // ── WINDOW START ─────────────────────────────────────────────
+function initHorizontalScroll() {
+  const wrapper = document.querySelector('.page-wrapper');
+  const cursor = document.getElementById('hscroll-cursor');
+  if (!wrapper) return;
+
+  // Vertical wheel → horizontal scroll
+  window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    wrapper.scrollLeft += e.deltaY;
+  }, { passive: false });
+
+  // Custom cursor on philosophy panels
+  window.addEventListener('mousemove', (e) => {
+    if (cursor) gsap.set(cursor, { x: e.clientX, y: e.clientY });
+  });
+
+  document.querySelectorAll('.hscroll-panel').forEach(panel => {
+    panel.addEventListener('mouseenter', () => cursor?.classList.add('visible'));
+    panel.addEventListener('mouseleave', () => cursor?.classList.remove('visible'));
+  });
+}
+
 window.addEventListener('DOMContentLoaded', () => {
   initSelectorList();
   initHardwareControls();
   initDrawers();
   initScopeCanvas();
+  initHorizontalScroll();
   const logo = document.querySelector('.nav-logo');
   scrambleText(logo);
   logo.addEventListener('mouseenter', () => scrambleText(logo));
