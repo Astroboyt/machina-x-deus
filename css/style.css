@@ -1,0 +1,676 @@
+@import "tailwindcss";
+
+/* ============================================================
+   MACHINA X DEUS — style.css
+   Mockup-aligned single-screen interface layout & aesthetics
+   ============================================================ */
+
+/* ── FONTS ──────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'PP Neue Machina';
+  src: url('../fonts/PP Neue Machina - Free for Personal Use/PPNeueMachina-InktrapRegular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PP Neue Machina';
+  src: url('../fonts/PP Neue Machina - Free for Personal Use/PPNeueMachina-InktrapUltrabold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PP Neue Machina Plain';
+  src: url('../fonts/PP Neue Machina - Free for Personal Use/PPNeueMachina-PlainLight.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── RESET & VARIABLES ──────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:          #faf5f3; /* Soft warm peach-cream background */
+  --bg-panel:    #fafaf7; /* High-quality silver-white aluminum plate */
+  --bg-dark:     #0c0d0c; /* Deep black for circular dial scope */
+  --text:        #141414; /* Deep high-contrast charcoal black */
+  --text-muted:  #8a8a82; /* Muted slate gray for inactive items */
+  --purple:      #852EF6; /* Bold electric violet-purple brand highlight */
+  --orange:      #e84e1c; /* Bipolar output jack highlight */
+  --border:      rgba(20, 20, 20, 0.08);
+}
+
+html, body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 400;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden; /* Strict single-screen viewport constraint */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── TOP NAV BAR ────────────────────────────────────────────── */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 56px 80px 24px;
+  background-color: #FFF7F7;
+}
+
+.nav-logo {
+  font-family: 'PP Neue Machina', 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: clamp(3.2rem, 5.5vw, 4.8rem);
+  letter-spacing: -0.015em;
+  color: var(--purple);
+  text-decoration: none;
+  line-height: 0.95;
+  transition: opacity 0.25s;
+}
+
+.nav-logo:hover {
+  opacity: 0.85;
+}
+
+.nav-auth {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: var(--text);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.nav-auth:hover {
+  opacity: 0.7;
+}
+
+/* ── MAIN CONTENT CONTAINER ─────────────────────────────────── */
+.main-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  padding: 0 80px;
+  align-items: center;
+  gap: 60px;
+}
+
+/* ── LEFT COLUMN: SELECTOR LIST ──────────────────────────────── */
+.selector-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.selector-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.selector-item {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.selector-title {
+  font-family: 'PP Neue Machina Plain', 'Inter', sans-serif;
+  font-weight: 300;
+  font-size: 2.3rem;
+  line-height: 1.1;
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+  letter-spacing: -0.015em;
+}
+
+.selector-sub {
+  font-family: 'Space Mono', monospace;
+  font-size: 1.05rem;
+  color: transparent;
+  margin-top: 4px;
+  transition: color 0.3s ease;
+}
+
+/* Active & Hover States */
+.selector-item:hover .selector-title {
+  color: var(--text);
+}
+
+.selector-item.active .selector-title {
+  color: var(--text);
+}
+
+.selector-item.active .selector-sub {
+  color: var(--text-muted);
+}
+
+/* ── RIGHT COLUMN: HARDWARE PREVIEW ─────────────────────────── */
+.preview-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.eurorack-viewport {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Hyper-detailed CSS replicas based on Xaoc Devices Odessa */
+.eurorack-panel {
+  background: var(--bg-panel);
+  border: 1.5px solid var(--text);
+  border-radius: 4px;
+  width: 380px;
+  height: 590px;
+  box-shadow:
+    0 16px 48px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 24px 18px 18px;
+}
+
+/* Rails & metal mounting screws */
+.panel-rail {
+  position: absolute;
+  left: 0; right: 0;
+  height: 8px;
+  background: #e2e1d7;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.panel-rail-top {
+  top: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.panel-rail-bottom {
+  bottom: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.panel-rail::before, .panel-rail::after {
+  content: '';
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #858680 75%, #4f4f49 100%);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+/* Panel labeling header details */
+.panel-header-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+  border-bottom: 1px solid rgba(20, 20, 20, 0.06);
+  padding-bottom: 8px;
+}
+
+.panel-brand {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.44rem;
+  letter-spacing: 0.3em;
+  color: var(--text-muted);
+}
+
+.panel-module-name {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  margin: 2px 0;
+}
+
+.panel-tech-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.42rem;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+/* ── CONTROLS LAYOUT ────────────────────────────────────────── */
+.module-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.controls-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.row-justified {
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+/* Knobs & tick marks rings */
+.knob-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.tick-ring {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(20, 20, 20, 0.15);
+  pointer-events: none;
+}
+
+.size-sm .tick-ring { width: 40px; height: 40px; }
+.size-md .tick-ring { width: 54px; height: 54px; }
+
+.eurorack-knob {
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #444 0%, #1e1e1e 75%, #050505 100%);
+  border: 1px solid var(--text);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.dial-sm { width: 28px; height: 28px; }
+.dial-md { width: 40px; height: 40px; }
+
+.knob-cap {
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  background: #111;
+  position: relative;
+}
+
+.knob-indicator {
+  position: absolute;
+  top: 2px; left: 50%;
+  width: 1.5px;
+  height: 8px;
+  background: #fff;
+  transform: translateX(-50%);
+  transform-origin: bottom center;
+}
+
+.dial-sm .knob-indicator { height: 6px; }
+
+.ctrl-lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.44rem;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-top: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* ── CENTRAL DISPLAY DIAL (OSCILLOSCOPE SCREEN) ───────────────── */
+.center-dial-section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.display-ring-ticks {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 174px;
+  height: 174px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  border: 1px dashed rgba(20, 20, 20, 0.25);
+  pointer-events: none;
+}
+
+.circular-display {
+  width: 160px;
+  height: 160px;
+  background: var(--bg-dark);
+  border: 2px solid var(--text);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 4px 16px rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#circular-scope-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.scope-grid-overlay {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, transparent 35%, rgba(0, 0, 0, 0.4) 80%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 16px 16px, 16px 16px;
+  background-position: center;
+  pointer-events: none;
+}
+
+/* Circular display inner dark dial button center core */
+.display-core {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #353535 0%, #1a1a1a 80%, #050505 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.display-caption {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.42rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ── SLIDERS SECTION ────────────────────────────────────────── */
+.slider-controls-row {
+  display: grid;
+  grid-template-columns: 50px 1fr 50px;
+  gap: 20px;
+  align-items: center;
+  justify-items: center;
+  padding: 0 16px;
+  margin-bottom: 12px;
+}
+
+.sub-knobs-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fader-track {
+  width: 8px;
+  height: 74px;
+  background: var(--text);
+  border-radius: 4px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.fader-ticks {
+  position: absolute;
+  inset: 0 -4px;
+  background-image: linear-gradient(to bottom, transparent 90%, rgba(20, 20, 20, 0.3) 90%);
+  background-size: 100% 8px;
+  pointer-events: none;
+}
+
+.fader-handle {
+  width: 22px;
+  height: 12px;
+  background: radial-gradient(circle at 35% 35%, #fff 0%, #dfdfd7 70%, #9a9b93 100%);
+  border: 1px solid var(--text);
+  border-radius: 2px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: ns-resize;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Red indicator line on fader */
+.fader-line {
+  width: 100%;
+  height: 2px;
+  background: var(--crimson);
+}
+
+/* ── EURORACK JACKS GRID (12 JACKS) ─────────────────────────── */
+.jacks-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 8px 6px;
+  margin-top: auto;
+  border-top: 1px dashed rgba(20, 20, 20, 0.1);
+  padding-top: 12px;
+}
+
+.jack-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.eurorack-jack {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #e2e1d7 0%, #9a9b93 100%);
+  border: 1px solid var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.08);
+}
+
+.eurorack-jack::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #111;
+  border: 1px solid #333;
+}
+
+.jack-in { border-color: var(--text); }
+.jack-out { border-color: var(--orange); }
+
+.jk-lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.38rem;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+  margin-top: 4px;
+  text-align: center;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ── BOTTOM NAV & DIVIDER ───────────────────────────────────── */
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding: 0 80px 56px;
+}
+
+.divider-line {
+  width: 100%;
+  height: 1px;
+  background-color: var(--text);
+  opacity: 0.15;
+  margin-bottom: 24px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 56px;
+}
+
+.footer-btn {
+  font-family: 'PP Neue Machina', 'Inter', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+  color: var(--purple);
+  text-decoration: none;
+  transition: opacity 0.25s, transform 0.2s;
+  text-transform: capitalize;
+}
+
+.footer-btn:hover {
+  opacity: 0.8;
+  transform: translateY(-1px);
+}
+
+/* ── OVERLAY DRAWER SHEETS ───────────────────────────────────── */
+.drawer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 420px;
+  background: var(--bg-panel);
+  border-top: 1.5px solid var(--text);
+  box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.12);
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.drawer.open {
+  transform: translateY(0);
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24px 80px;
+  border-bottom: 1px solid var(--border);
+}
+
+.drawer-header h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  color: var(--text);
+}
+
+.drawer-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.2s;
+  line-height: 1;
+}
+
+.drawer-close:hover {
+  color: var(--text);
+}
+
+.drawer-body {
+  flex: 1;
+  padding: 32px 80px;
+  overflow-y: auto;
+}
+
+.drawer-body p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #3e3e38;
+  margin-bottom: 20px;
+  max-width: 800px;
+}
+
+.drawer-body h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.1em;
+  color: var(--text);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.schema-block {
+  margin-bottom: 24px;
+}
+
+.schema-block p {
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+
+.doc-table {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+
+.doc-table th, .doc-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  text-align: left;
+}
+
+.doc-table th {
+  color: var(--text-muted);
+  width: 240px;
+}
+
+.doc-table td {
+  color: var(--text);
+  font-weight: 700;
+}
+
+/* ── SELECTION COLOR ────────────────────────────────────────── */
+::selection {
+  background: rgba(133, 46, 246, 0.15);
+  color: var(--text);
+}
