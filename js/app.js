@@ -396,7 +396,7 @@ function initHorizontalScroll() {
     if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
 
     e.preventDefault();
-    wrapper.scrollBy({ left: e.deltaY * 1.2, behavior: 'smooth' });
+    wrapper.scrollBy({ left: e.deltaY * 4, behavior: 'smooth' });
   }, { passive: false });
 
   // Custom cursor on philosophy panels
