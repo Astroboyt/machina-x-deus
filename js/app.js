@@ -395,12 +395,14 @@ function initHorizontalScroll() {
   let lastDeltaSign = 0;
 
   window.addEventListener('wheel', (e) => {
+    // If trackpad is swiping horizontally, let the browser handle it natively
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
     e.preventDefault();
     const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
     const deltaSign = Math.sign(e.deltaY);
 
     // On direction reversal, re-anchor target to current animated position
-    // so the tween doesn't keep coasting in the old direction
     if (deltaSign !== lastDeltaSign && lastDeltaSign !== 0) {
       targetScroll = gsap.getProperty(wrapper, 'scrollLeft') || wrapper.scrollLeft;
     }
