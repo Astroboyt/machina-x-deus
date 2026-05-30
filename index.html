@@ -3,206 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MACHINA X DEUS — Emergent Modular Instruments</title>
+  <title>Arvi — Design & Sound</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <!-- ── CUSTOM CURSOR ────────────────────────────────────────── -->
-  <div class="hscroll-cursor" id="hscroll-cursor">
-    <svg width="48" height="16" viewBox="0 0 48 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M1 8h46M1 8l6-6M1 8l6 6M47 8l-6-6M47 8l-6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-  </div>
-
-  <!-- ── NAV (fixed across all panels) ───────────────────────── -->
+  <!-- NAV -->
   <nav class="nav" id="nav">
-        <a href="#" class="nav-logo">MACHINA x DEUS</a>
-        <div class="nav-auth">
-          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="7" cy="5" r="2.5" stroke="#141414" stroke-width="1"/>
-            <path d="M1.5 13.5c0-3.038 2.462-5.5 5.5-5.5s5.5 2.462 5.5 5.5" stroke="#141414" stroke-width="1" stroke-linecap="round"/>
-          </svg>
-          Log in / Sign up
-        </div>
+    <a href="#" class="nav-logo" id="nav-logo">ARVI</a>
+    <div class="nav-links">
+      <a href="#work" class="nav-link">Work</a>
+      <a href="#about" class="nav-link">About</a>
+    </div>
   </nav>
 
-  <!-- ── PAGE WRAPPER (horizontal scroll container) ───────────── -->
-  <div class="page-wrapper">
+  <!-- HERO: DRUM SEQUENCER -->
+  <section class="hero" id="hero">
 
-    <!-- PANEL 1: HERO ─────────────────────────────────────────── -->
-    <div class="panel panel-hero">
+    <div class="sequencer" id="sequencer">
 
-      <main class="main-container">
-
-        <div class="selector-column">
-          <div class="selector-list">
-
-            <div class="selector-item active" data-module="butterfly">
-              <span class="selector-title">Butterfly3000</span>
-              <span class="selector-sub">Lorenz Attractor</span>
-              <div class="selector-desc">
-                <p>A three-dimensional chaos oscillator built on the Lorenz system. Generates continuously evolving, non-repeating CV across X, Y, and Z axes — no two moments are the same.</p>
-              </div>
-            </div>
-
-            <div class="selector-item" data-module="chua">
-              <span class="selector-title">Chua Chua</span>
-              <span class="selector-sub">Chua's Circuit</span>
-              <div class="selector-desc">
-                <p>An analog simulation of Chua's Circuit — the simplest autonomous circuit capable of true chaos. Two interlocked scroll attractors generate dense, organic modulation.</p>
-              </div>
-            </div>
-
-            <div class="selector-item" data-module="double">
-              <span class="selector-title">Double Scroll</span>
-              <span class="selector-sub">Double Scroll Attractor</span>
-              <div class="selector-desc">
-                <p>A labyrinthine attractor engine based on Thomas' cyclically symmetric system. Slow-drifting signal paths wander between three interlocked strange attractors.</p>
-              </div>
-            </div>
-
-          </div>
-          <a href="#" class="view-module-btn view-module-btn--standalone">View Module</a>
+      <!-- Track labels + mute buttons -->
+      <div class="seq-tracks">
+        <div class="track-label" data-track="0">
+          <button class="mute-btn active" data-track="0">KK</button>
         </div>
-
-        <div class="preview-column">
-          <div class="eurorack-viewport">
-            <div class="eurorack-panel" id="hardware-panel">
-              <div class="panel-rail panel-rail-top"></div>
-              <div class="panel-header-info">
-                <span class="panel-brand">MACHINA X DEUS</span>
-                <span class="panel-module-name" id="module-display-name">BUTTERFLY3000</span>
-                <span class="panel-tech-label">CHAOS CLUSTER GENERATOR</span>
-              </div>
-              <div class="module-body">
-                <div class="controls-row row-justified">
-                  <div class="knob-container size-sm"><div class="tick-ring"></div><div class="eurorack-knob dial-sm"><div class="knob-cap"><div class="knob-indicator"></div></div></div><span class="ctrl-lbl">COARSE</span></div>
-                  <div class="knob-container size-sm"><div class="tick-ring"></div><div class="eurorack-knob dial-sm"><div class="knob-cap"><div class="knob-indicator"></div></div></div><span class="ctrl-lbl">WARP</span></div>
-                </div>
-                <div class="controls-row row-justified">
-                  <div class="knob-container size-md"><div class="tick-ring"></div><div class="eurorack-knob dial-md"><div class="knob-cap"><div class="knob-indicator"></div></div></div><span class="ctrl-lbl">BANK LENGTH</span></div>
-                  <div class="knob-container size-md"><div class="tick-ring"></div><div class="eurorack-knob dial-md"><div class="knob-cap"><div class="knob-indicator"></div></div></div><span class="ctrl-lbl">HARMONIC</span></div>
-                </div>
-                <div class="center-dial-section">
-                  <div class="display-ring-ticks"></div>
-                  <div class="circular-display">
-                    <canvas id="circular-scope-canvas"></canvas>
-                    <div class="scope-grid-overlay"></div>
-                    <div class="display-core"></div>
-                  </div>
-                  <span class="display-caption">ATTRACTOR VECTOR PORTRAIT</span>
-                </div>
-                <div class="controls-row row-justified">
-                  <div class="knob-container size-md"><div class="tick-ring"></div><div class="eurorack-knob dial-md"><div class="knob-cap"><div class="knob-indicator"></div></div></div><span class="ctrl-lbl">SPREAD</span></div>
-                  <div class="knob-container size-md"><div class="tick-ring"></div><div class="eurorack-knob dial-md"><div class="knob-cap"><div class="knob-indicator"></div></div></div><span class="ctrl-lbl">PEAKING</span></div>
-                </div>
-                <div class="slider-controls-row">
-                  <div class="fader-container"><div class="fader-track"><div class="fader-ticks"></div><div class="fader-handle"><div class="fader-line"></div></div></div><span class="ctrl-lbl">EVERS</span></div>
-                  <div class="sub-knobs-group">
-                    <div class="knob-container size-sm"><div class="tick-ring"></div><div class="eurorack-knob dial-sm"><div class="knob-cap"><div class="knob-indicator"></div></div></div><span class="ctrl-lbl">TENSION</span></div>
-                    <div class="knob-container size-sm" style="margin-top: 10px;"><div class="tick-ring"></div><div class="eurorack-knob dial-sm"><div class="knob-cap"><div class="knob-indicator"></div></div></div><span class="ctrl-lbl">ODDS</span></div>
-                  </div>
-                  <div class="fader-container"><div class="fader-track"><div class="fader-ticks"></div><div class="fader-handle"><div class="fader-line"></div></div></div><span class="ctrl-lbl">DENSITY</span></div>
-                </div>
-              </div>
-              <div class="jacks-grid">
-                <div class="jack-wrapper"><div class="eurorack-jack jack-in"></div><span class="jk-lbl">V/OCT</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-in"></div><span class="jk-lbl">LIN FM</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-in"></div><span class="jk-lbl">EXP FM</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-in"></div><span class="jk-lbl">EVERS</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-in"></div><span class="jk-lbl">ODDS</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-in"></div><span class="jk-lbl">TENS</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-out"></div><span class="jk-lbl">OUT X</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-out"></div><span class="jk-lbl">OUT Y</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-out"></div><span class="jk-lbl">OUT Z</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-out"></div><span class="jk-lbl">AUDIO</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-in"></div><span class="jk-lbl">BYPASS</span></div>
-                <div class="jack-wrapper"><div class="eurorack-jack jack-in"></div><span class="jk-lbl">WARP</span></div>
-              </div>
-              <div class="panel-rail panel-rail-bottom"></div>
-            </div>
-          </div>
+        <div class="track-label" data-track="1">
+          <button class="mute-btn active" data-track="1">SN</button>
         </div>
-
-      </main>
-
-      <footer class="footer">
-        <p class="footer-tagline">Instruments that drift, mutate, and decide for themselves.</p>
-        <div class="divider-line"></div>
-        <div class="footer-links">
-          <a href="#" class="footer-btn" data-drawer="about">About</a>
-          <a href="#" class="footer-btn" data-drawer="schema">Schema</a>
-          <a href="#" class="footer-btn" data-drawer="doc">Documentation</a>
+        <div class="track-label" data-track="2">
+          <button class="mute-btn active" data-track="2">HH</button>
         </div>
-      </footer>
+        <div class="track-label" data-track="3">
+          <button class="mute-btn active" data-track="3">PC</button>
+        </div>
+      </div>
 
-    </div><!-- end panel-hero -->
+      <!-- Step grid -->
+      <div class="seq-grid" id="seq-grid">
+        <!-- Steps injected by JS -->
+      </div>
 
-    <!-- PANELS 2–5: PHILOSOPHY ────────────────────────────────── -->
-    <div class="panel hscroll-panel">
-      <span class="hscroll-num">01</span>
-      <h2 class="hscroll-heading">Chaos is not<br>disorder.</h2>
-      <p class="hscroll-body">It is a higher order — one governed by equations too sensitive for human intuition to predict.</p>
+      <!-- Playhead column overlay -->
+      <div class="playhead" id="playhead"></div>
+
     </div>
 
-    <div class="panel hscroll-panel">
-      <span class="hscroll-num">02</span>
-      <h2 class="hscroll-heading">The machine<br>decides the path.</h2>
-      <p class="hscroll-body">The performer sets the initial conditions. Everything after belongs to the attractor.</p>
+    <!-- Controls bar -->
+    <div class="seq-controls">
+      <button class="play-btn" id="play-btn">
+        <span class="play-icon" id="play-icon">▶</span>
+      </button>
+      <div class="bpm-control">
+        <span class="ctrl-label">BPM</span>
+        <input type="range" class="bpm-slider" id="bpm-slider" min="60" max="180" value="120" step="1">
+        <span class="bpm-value" id="bpm-value">120</span>
+      </div>
+      <button class="clear-btn" id="clear-btn">CLEAR</button>
     </div>
 
-    <div class="panel hscroll-panel">
-      <span class="hscroll-num">03</span>
-      <h2 class="hscroll-heading">No moment<br>repeats.</h2>
-      <p class="hscroll-body">Deterministic systems — same rules, never the same result. Every performance is a first and final take.</p>
+  </section>
+
+  <!-- WORK SECTION -->
+  <section class="work" id="work">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Work</h2>
     </div>
 
-    <div class="panel hscroll-panel">
-      <span class="hscroll-num">04</span>
-      <h2 class="hscroll-heading">Strange attractors<br>for strange music.</h2>
-      <p class="hscroll-body">We build instruments that drift, mutate, and surprise — even us. That's the point.</p>
+    <div class="work-grid">
+
+      <article class="project-card">
+        <div class="project-img placeholder"></div>
+        <div class="project-info">
+          <span class="project-tag">Eurorack / Hardware</span>
+          <h3 class="project-name">Machina X Deus</h3>
+          <p class="project-desc">Chaos oscillator modules for Eurorack. Lorenz, Chua, and Thomas attractors rendered in analog hardware.</p>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-img placeholder"></div>
+        <div class="project-info">
+          <span class="project-tag">Product Design</span>
+          <h3 class="project-name">Project Two</h3>
+          <p class="project-desc">A short description of the work goes here. Discipline, context, what it does.</p>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-img placeholder"></div>
+        <div class="project-info">
+          <span class="project-tag">Synthesis / Software</span>
+          <h3 class="project-name">Project Three</h3>
+          <p class="project-desc">A short description of the work goes here. Discipline, context, what it does.</p>
+        </div>
+      </article>
+
+      <article class="project-card">
+        <div class="project-img placeholder"></div>
+        <div class="project-info">
+          <span class="project-tag">Education</span>
+          <h3 class="project-name">Red Giant</h3>
+          <p class="project-desc">A school concept for CS, electronics, and synthesis. Somewhere remote. Somewhere real.</p>
+        </div>
+      </article>
+
     </div>
+  </section>
 
-  </div><!-- end page-wrapper -->
-
-  <!-- ── DRAWERS ───────────────────────────────────────────────── -->
-  <div class="drawer" id="drawer-about">
-    <div class="drawer-header"><h3>About Machina X Deus</h3><button class="drawer-close">×</button></div>
-    <div class="drawer-body">
-      <p><strong>Machina X Deus</strong> is an exploration into hardware instruments that generate evolving, complex, or emergent behavior.</p>
-      <p>Rather than standard synthesis tools which act as simple static utilities, our hardware instruments are built to interact. They drift, mutate, and exhibit instability on their own terms. The performer establishes boundaries; the machine decides the final mathematical path.</p>
-      <p>Inspired by classical chaos theory and modular design, our systems reflect a balanced co-existence of deterministic laws and chaotic results.</p>
+  <!-- ABOUT SECTION -->
+  <section class="about" id="about">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">About</h2>
     </div>
-  </div>
-
-  <div class="drawer" id="drawer-schema">
-    <div class="drawer-header"><h3>Circuit Schematics & Blocks</h3><button class="drawer-close">×</button></div>
-    <div class="drawer-body">
-      <div class="schema-block"><h4>1. Butterfly3000 (Lorenz Attractor)</h4><p>Three active integrators coupled in a self-referential loop. Uses two analog multipliers to implement the cross-multiplication states ($xy$ and $xz$). Generates three continuous bipolar signals: X, Y, and Z.</p></div>
-      <div class="schema-block"><h4>2. Chua Chua (Chua's Circuit)</h4><p>Built with two capacitors, an inductor, a standard resistor, and the active non-linear element known as the **Chua Diode** (implemented via a dual op-amp negative impedance converter). Unstable scroll rings trigger audio drones.</p></div>
-      <div class="schema-block"><h4>3. Double Scroll Attractor</h4><p>Dual hysteric comparator coupled back into a second-order resonant filter loop. Creates rhythmic trigger bursts that mimic neural packet firing patterns.</p></div>
+    <div class="about-body">
+      <p class="about-text">Designer and sound explorer based in Barcelona. Working at the intersection of hardware, synthesis, and code.</p>
+      <p class="about-text muted">Currently building modular instruments, learning CS, and thinking about schools.</p>
+      <a href="mailto:hello@example.com" class="contact-link">Say hello →</a>
     </div>
-  </div>
+  </section>
 
-  <div class="drawer" id="drawer-doc">
-    <div class="drawer-header"><h3>System Documentation</h3><button class="drawer-close">×</button></div>
-    <div class="drawer-body">
-      <h4>EURORACK SYSTEM STANDARDS</h4>
-      <table class="doc-table">
-        <tr><th>Format</th><td>Eurorack Synthesizer (3U)</td></tr>
-        <tr><th>Power Requirement</th><td>±12V DC (standard Eurorack ribbon)</td></tr>
-        <tr><th>Bipolar CV Output Range</th><td>-5V to +5V (10V Peak-to-Peak)</td></tr>
-        <tr><th>Audio Output Range</th><td>-5V to +5V (10V peak)</td></tr>
-        <tr><th>CV Input Impedance</th><td>100kΩ</td></tr>
-        <tr><th>Attractor Frequency Rates</th><td>0.01Hz (LFO rate) to 1.8kHz (Audio rate)</td></tr>
-      </table>
-    </div>
-  </div>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <span class="footer-name">ARVI — 2025</span>
+    <span class="footer-city">Barcelona</span>
+  </footer>
 
-  <script type="module" src="js/app.js"></script>
+  <script src="js/sequencer.js"></script>
 </body>
 </html>
