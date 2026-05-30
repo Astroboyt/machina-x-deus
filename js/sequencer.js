@@ -202,9 +202,6 @@ document.querySelectorAll('.mute-btn').forEach(btn => {
   });
 });
 
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
 
 // ── SCRAMBLE ──────────────────────────────────────────────────
 function scramble(el, ms = 600) {

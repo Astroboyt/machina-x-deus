@@ -31,14 +31,14 @@
   --border-strong: rgba(20, 20, 20, 0.22);
   --purple:        #852EF6;
 
-  /* sequencer panel */
-  --panel-bg:      #0f0f0e;
-  --panel-border:  rgba(255, 255, 255, 0.07);
-  --step-idle:     rgba(255, 255, 255, 0.04);
-  --step-divide:   rgba(255, 255, 255, 0.10);
-  --step-on-bg:    #faf5f3;
-  --step-hover:    rgba(255, 255, 255, 0.10);
-  --play-glow:     rgba(133, 46, 246, 0.55);
+  /* sequencer panel — slightly darker industrial plate */
+  --panel-bg:      #ddd8d0;
+  --panel-border:  rgba(0, 0, 0, 0.18);
+  --step-idle:     rgba(0, 0, 0, 0.05);
+  --step-divide:   rgba(0, 0, 0, 0.18);
+  --step-on-bg:    #141414;
+  --step-hover:    rgba(0, 0, 0, 0.12);
+  --play-glow:     rgba(133, 46, 246, 0.7);
 
   --font-main: 'PP Neue Machina', 'Space Mono', monospace;
   --font-mono: 'Space Mono', monospace;
@@ -56,6 +56,7 @@ html, body {
   height: 100%;
 }
 
+
 /* ── NAV ──────────────────────────────────────────────────── */
 .nav {
   position: fixed;
@@ -64,24 +65,18 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 28px 60px;
-  background: var(--bg);
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s;
-}
-
-.nav.scrolled {
-  border-bottom-color: var(--border);
+  padding: 40px 60px 28px;
+  background: transparent;
 }
 
 .nav-logo {
   font-family: var(--font-main);
   font-weight: 400;
-  font-size: clamp(1.4rem, 2.8vw, 2rem);
-  letter-spacing: -0.01em;
+  font-size: clamp(3.2rem, 5.5vw, 4.8rem);
+  letter-spacing: -0.015em;
   color: var(--purple);
   text-decoration: none;
-  line-height: 1;
+  line-height: 0.95;
 }
 
 .nav-tag {
@@ -99,7 +94,7 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 110px 40px 80px;
+  padding: 160px 40px 100px;
   gap: 28px;
 }
 
@@ -108,15 +103,12 @@ html, body {
   position: relative;
   display: flex;
   width: 100%;
-  max-width: 960px;
+  max-width: 1120px;
   background: var(--panel-bg);
-  border: 1px solid var(--panel-border);
-  border-radius: 3px;
+  border: 1.5px solid rgba(0, 0, 0, 0.35);
+  border-radius: 8px;
   overflow: hidden;
-  box-shadow:
-    0 40px 100px rgba(0, 0, 0, 0.18),
-    0 12px 32px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  box-shadow: none;
 }
 
 /* ── TRACK LABELS ─────────────────────────────────────────── */
@@ -128,12 +120,12 @@ html, body {
 }
 
 .track-row {
-  height: 64px;
+  height: 80px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid var(--panel-border);
-  padding: 0 18px;
+  padding: 0 20px;
 }
 
 .track-row:last-child {
@@ -142,36 +134,36 @@ html, body {
 
 .mute-btn {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: rgba(250, 245, 243, 0.25);
+  color: rgba(20, 20, 20, 0.3);
   background: none;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 2px;
   padding: 5px 9px;
   cursor: pointer;
   transition: color 0.15s, border-color 0.15s, background 0.15s;
-  min-width: 40px;
+  min-width: 42px;
   text-align: center;
 }
 
 .mute-btn.active {
-  color: rgba(250, 245, 243, 0.85);
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.05);
+  color: rgba(20, 20, 20, 0.8);
+  border-color: rgba(0, 0, 0, 0.35);
+  background: rgba(0, 0, 0, 0.07);
 }
 
 .mute-btn:hover {
-  color: rgba(250, 245, 243, 0.9);
-  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(20, 20, 20, 0.9);
+  border-color: rgba(0, 0, 0, 0.4);
 }
 
 /* ── STEP GRID ────────────────────────────────────────────── */
 .seq-grid {
   display: grid;
   grid-template-columns: repeat(16, 1fr);
-  grid-template-rows: repeat(4, 64px);
+  grid-template-rows: repeat(4, 80px);
   flex: 1;
 }
 
@@ -211,17 +203,18 @@ html, body {
 }
 
 .step.on:hover {
-  background: #ffffff;
+  background: #2a2a28;
 }
 
-/* playhead highlight */
+/* playhead highlight — empty step */
 .step.playing {
-  background: rgba(133, 46, 246, 0.18);
+  background: rgba(133, 46, 246, 0.10);
 }
 
+/* playhead hits an active step — flash purple */
 .step.on.playing {
-  background: #ffffff;
-  box-shadow: inset 0 0 0 1.5px var(--purple), 0 0 12px var(--play-glow);
+  background: var(--purple);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
 }
 
 /* ── PLAYHEAD STRIPE ──────────────────────────────────────── */
@@ -247,7 +240,7 @@ html, body {
   align-items: center;
   gap: 28px;
   width: 100%;
-  max-width: 960px;
+  max-width: 1120px;
 }
 
 .play-btn {
@@ -269,8 +262,8 @@ html, body {
 }
 
 .play-btn.playing {
-  background: var(--text);
-  border-color: var(--text);
+  background: var(--purple);
+  border-color: var(--purple);
 }
 
 .play-icon {
@@ -281,7 +274,7 @@ html, body {
 }
 
 .play-btn.playing .play-icon {
-  color: var(--bg);
+  color: #fff;
 }
 
 .bpm-wrap {
