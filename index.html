@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Arvi — Design & Sound</title>
+  <title>Machina X Deus — Drum Sequencer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -11,52 +11,41 @@
 </head>
 <body>
 
-  <!-- NAV -->
   <nav class="nav" id="nav">
-    <a href="#" class="nav-logo" id="nav-logo">ARVI</a>
-    <div class="nav-links">
-      <a href="#work" class="nav-link">Work</a>
-      <a href="#about" class="nav-link">About</a>
-    </div>
+    <a href="#" class="nav-logo" id="nav-logo">MACHINA x DEUS</a>
+    <span class="nav-tag">PERCUSSION SYNTHESIZER</span>
   </nav>
 
-  <!-- HERO: DRUM SEQUENCER -->
-  <section class="hero" id="hero">
+  <section class="hero">
 
     <div class="sequencer" id="sequencer">
 
-      <!-- Track labels + mute buttons -->
       <div class="seq-tracks">
-        <div class="track-label" data-track="0">
+        <div class="track-row">
           <button class="mute-btn active" data-track="0">KK</button>
         </div>
-        <div class="track-label" data-track="1">
+        <div class="track-row">
           <button class="mute-btn active" data-track="1">SN</button>
         </div>
-        <div class="track-label" data-track="2">
+        <div class="track-row">
           <button class="mute-btn active" data-track="2">HH</button>
         </div>
-        <div class="track-label" data-track="3">
+        <div class="track-row">
           <button class="mute-btn active" data-track="3">PC</button>
         </div>
       </div>
 
-      <!-- Step grid -->
-      <div class="seq-grid" id="seq-grid">
-        <!-- Steps injected by JS -->
-      </div>
+      <div class="seq-grid" id="seq-grid"></div>
 
-      <!-- Playhead column overlay -->
       <div class="playhead" id="playhead"></div>
 
     </div>
 
-    <!-- Controls bar -->
     <div class="seq-controls">
       <button class="play-btn" id="play-btn">
         <span class="play-icon" id="play-icon">▶</span>
       </button>
-      <div class="bpm-control">
+      <div class="bpm-wrap">
         <span class="ctrl-label">BPM</span>
         <input type="range" class="bpm-slider" id="bpm-slider" min="60" max="180" value="120" step="1">
         <span class="bpm-value" id="bpm-value">120</span>
@@ -66,71 +55,9 @@
 
   </section>
 
-  <!-- WORK SECTION -->
-  <section class="work" id="work">
-    <div class="section-header">
-      <span class="section-num">01</span>
-      <h2 class="section-title">Work</h2>
-    </div>
-
-    <div class="work-grid">
-
-      <article class="project-card">
-        <div class="project-img placeholder"></div>
-        <div class="project-info">
-          <span class="project-tag">Eurorack / Hardware</span>
-          <h3 class="project-name">Machina X Deus</h3>
-          <p class="project-desc">Chaos oscillator modules for Eurorack. Lorenz, Chua, and Thomas attractors rendered in analog hardware.</p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-img placeholder"></div>
-        <div class="project-info">
-          <span class="project-tag">Product Design</span>
-          <h3 class="project-name">Project Two</h3>
-          <p class="project-desc">A short description of the work goes here. Discipline, context, what it does.</p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-img placeholder"></div>
-        <div class="project-info">
-          <span class="project-tag">Synthesis / Software</span>
-          <h3 class="project-name">Project Three</h3>
-          <p class="project-desc">A short description of the work goes here. Discipline, context, what it does.</p>
-        </div>
-      </article>
-
-      <article class="project-card">
-        <div class="project-img placeholder"></div>
-        <div class="project-info">
-          <span class="project-tag">Education</span>
-          <h3 class="project-name">Red Giant</h3>
-          <p class="project-desc">A school concept for CS, electronics, and synthesis. Somewhere remote. Somewhere real.</p>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ABOUT SECTION -->
-  <section class="about" id="about">
-    <div class="section-header">
-      <span class="section-num">02</span>
-      <h2 class="section-title">About</h2>
-    </div>
-    <div class="about-body">
-      <p class="about-text">Designer and sound explorer based in Barcelona. Working at the intersection of hardware, synthesis, and code.</p>
-      <p class="about-text muted">Currently building modular instruments, learning CS, and thinking about schools.</p>
-      <a href="mailto:hello@example.com" class="contact-link">Say hello →</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
   <footer class="footer">
-    <span class="footer-name">ARVI — 2025</span>
-    <span class="footer-city">Barcelona</span>
+    <span class="footer-left">MACHINA X DEUS</span>
+    <span class="footer-right">Instruments for chaos.</span>
   </footer>
 
   <script src="js/sequencer.js"></script>
